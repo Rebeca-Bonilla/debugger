@@ -5,7 +5,7 @@ module.exports = defineConfig({
   publicPath: '/',
   chainWebpack: config => {
     config.plugin('html').tap(args => {
-      args[0].title = 'Debugger - Tu App'; // Aquí puedes cambiar el título
+      args[0].title = 'Debugger';
       return args;
     })
   }
