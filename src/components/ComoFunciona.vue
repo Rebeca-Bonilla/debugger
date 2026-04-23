@@ -1,10 +1,10 @@
 <template>
   <section class="como-funciona" id="como-funciona">
     <div class="container">
-      <div class="section-tag reveal">¿Cómo funciona?</div>
-      <h2 class="reveal stagger-1">Protección invisible,<br/>comodidad real</h2>
+      <div class="section-tag" data-aos="fade-up">¿Cómo funciona?</div>
+      <h2 data-aos="fade-up" data-aos-delay="100">Protección invisible,<br/>comodidad real</h2>
       <div class="steps">
-        <div class="step reveal" v-for="(s, i) in steps" :key="i" :class="'stagger-' + (i + 1)">
+        <div class="step" v-for="(s, i) in steps" :key="i" data-aos="fade-up" :data-aos-delay="(i + 1) * 150">
           <div class="step__num">{{ String(i + 1).padStart(2, '0') }}</div>
           <div class="step__content">
             <h3>{{ s.titulo }}</h3>
@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="como-funciona__banner reveal stagger-4">
+      <div class="como-funciona__banner" data-aos="fade-up" data-aos-delay="500">
         <span class="banner__text">La tecnología de microencapsulado libera el repelente gradualmente con el movimiento y el calor del cuerpo.</span>
       </div>
     </div>
@@ -79,7 +79,7 @@ h2 {
   border: 1px solid var(--border-gray);
   border-radius: 20px;
   background: var(--bg-pure);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
   box-shadow: var(--shadow-standard);
   position: relative;
   overflow: hidden;
@@ -90,16 +90,17 @@ h2 {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(20, 86, 240, 0.03) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(20, 86, 240, 0.06) 0%, rgba(234, 94, 193, 0.03) 50%, transparent 100%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
 .step:hover {
   background: var(--bg-pure);
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-elevated);
-  border-color: rgba(20, 86, 240, 0.25);
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 40px 80px rgba(20, 86, 240, 0.18), var(--shadow-elevated);
+  border-color: rgba(20, 86, 240, 0.4);
 }
 
 .step:hover::before {
@@ -107,7 +108,12 @@ h2 {
 }
 
 .step:hover .step__num {
-  color: rgba(20, 86, 240, 0.15);
+  color: rgba(20, 86, 240, 0.2);
+  transform: scale(1.1);
+}
+
+.step:hover .step__content h3 {
+  color: var(--brand-primary);
 }
 
 .step__num {
@@ -121,11 +127,17 @@ h2 {
   top: -10px;
   right: -10px;
   z-index: 0;
+  transition: color 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .step__content {
   position: relative;
   z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.step:hover .step__content {
+  transform: translateY(-5px);
 }
 
 .step__content h3 {
@@ -134,6 +146,7 @@ h2 {
   font-weight: 600;
   color: var(--text-dark);
   margin-bottom: 0.8rem;
+  transition: color 0.3s ease;
 }
 
 .step__content p {

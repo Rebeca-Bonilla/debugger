@@ -2,11 +2,14 @@
   <footer class="footer" id="contacto">
     <div class="container">
       <div class="footer__grid">
-        <div class="footer__brand">
-          <div class="footer__logo">DEBUGGER</div>
+        <div class="footer__brand" data-aos="fade-up">
+          <div class="footer__logo">
+            <img src="/3781-logow.svg" alt="Logo" />
+            <span class="brand-text">DEBUGGER</span>
+          </div>
           <p>Ropa con repelente integrado.<br/>Hecha para el trópico.</p>
         </div>
-        <div class="footer__links">
+        <div class="footer__links" data-aos="fade-up" data-aos-delay="100">
           <h4>Navegación</h4>
           <ul>
             <li><a href="#que-es">¿Qué es?</a></li>
@@ -14,7 +17,7 @@
             <li><a href="#catalogo">Catálogo</a></li>
           </ul>
         </div>
-        <div class="footer__contact">
+        <div class="footer__contact" data-aos="fade-up" data-aos-delay="200">
           <h4>Contacto</h4>
           <p>¿Tienes dudas o quieres hacer un pedido personalizado?</p>
           <a href="mailto:debugger.co.sv@gmail.com" class="footer__email">debugger.co.sv@gmail.com</a>
@@ -29,8 +32,8 @@
           </div>
         </div>
       </div>
-      <div class="footer__bottom">
-        <span>© 2025 Debugger. Todos los derechos reservados.</span>
+      <div class="footer__bottom" data-aos="fade-up" data-aos-delay="300">
+        <span>© 2026 Debugger. Todos los derechos reservados.</span>
       </div>
     </div>
   </footer>
@@ -62,12 +65,23 @@ export default { name: 'FooterSection' }
 }
 
 .footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer__logo img {
+  height: 42px;
+  width: auto;
+}
+
+.footer__logo .brand-text {
   font-family: 'Outfit', sans-serif;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.4rem;
-  color: #fff;
-  letter-spacing: 0.12em;
-  margin-bottom: 1rem;
+  color: #ffffff;
+  letter-spacing: 0.05em;
 }
 
 .footer__brand p {
@@ -100,10 +114,14 @@ export default { name: 'FooterSection' }
   color: rgba(255,255,255,0.5);
   text-decoration: none;
   font-size: 14px;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
 }
 
-.footer__links a:hover { color: var(--brand-primary); }
+.footer__links a:hover { 
+  color: var(--brand-primary); 
+  transform: translateX(6px);
+}
 
 .footer__contact p {
   font-family: 'DM Sans', sans-serif;
@@ -165,8 +183,13 @@ export default { name: 'FooterSection' }
   color: rgba(255,255,255,0.3);
 }
 
+/* === DARK MODE === */
+:global(html.dark) .footer {
+  background: #0a0c10;
+}
+
 @media (max-width: 768px) {
   .footer { padding: 4rem 1.5rem 2rem; }
-  .footer__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .footer__grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 </style>

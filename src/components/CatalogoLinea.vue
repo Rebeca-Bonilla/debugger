@@ -1,11 +1,11 @@
 <template>
   <section class="catalogo" id="catalogo">
     <div class="container">
-      <div class="section-tag">Catálogo</div>
+      <div class="section-tag" data-aos="fade-up">Catálogo</div>
       <div class="catalogo__header">
         <div>
-          <h2>Nuestras prendas</h2>
-          <p class="catalogo__sub">Toda la línea incluye tratamiento repelente, tela transpirable y protección UV.</p>
+          <h2 data-aos="fade-up" data-aos-delay="50">Nuestras prendas</h2>
+          <p class="catalogo__sub" data-aos="fade-up" data-aos-delay="100">Toda la línea incluye tratamiento repelente, tela transpirable y protección UV.</p>
         </div>
         <div class="filtros">
           <button
@@ -19,7 +19,7 @@
       </div>
 
       <div class="productos__grid">
-        <div class="producto reveal" v-for="(p, i) in productosFiltrados" :key="p.nombre" :class="'stagger-' + (i % 4 + 1)">
+        <div class="producto" v-for="(p, i) in productosFiltrados" :key="p.nombre" data-aos="fade-up" :data-aos-delay="(i % 4) * 100">
           <div class="producto__img" :style="{ background: p.bg }">
             <div class="producto__placeholder">{{ p.emoji }}</div>
             <span class="producto__tag" v-if="p.nuevo">Nuevo</span>
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div class="catalogo__nota">
+      <div class="catalogo__nota" data-aos="fade-up">
         <span class="material-symbols-rounded">contact_support</span>
         <p>¿Eres hotel, agencia de turismo o empresa? Contáctanos para <strong>precios especiales B2B</strong> y uniformes personalizados.</p>
         <a href="#contacto" class="btn-nota">Ver contacto</a>
@@ -212,8 +212,17 @@ h2 {
 }
 
 .producto:hover {
-  box-shadow: var(--shadow-elevated);
-  transform: translateY(-6px);
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 25px 50px rgba(20, 86, 240, 0.12), var(--shadow-elevated);
+  border-color: rgba(20, 86, 240, 0.3);
+}
+
+.producto:hover .producto__img {
+  transform: scale(1.03);
+}
+
+.producto:hover .producto__placeholder {
+  transform: scale(1.1) rotate(-3deg);
 }
 
 .producto__img {
@@ -228,7 +237,11 @@ h2 {
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.producto__placeholder { font-size: 5rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
+.producto__placeholder { 
+  font-size: 5rem; 
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); 
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
 .producto__tag {
   position: absolute;
@@ -332,6 +345,17 @@ h2 {
   border-radius: 0 20px 20px 0;
   padding: 1.8rem 2.5rem;
   flex-wrap: wrap;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, background 0.3s ease;
+}
+
+.catalogo__nota:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+  background: rgba(20, 86, 240, 0.06);
+}
+
+.catalogo__nota:hover > span:first-child {
+  transform: scale(1.1) rotate(-5deg);
 }
 
 .catalogo__nota span { 
@@ -340,11 +364,12 @@ h2 {
   align-items: center;
   justify-content: center;
   color: var(--brand-primary);
-  background: #fff;
+  background: var(--bg-pure);
   width: 56px;
   height: 56px;
   border-radius: 50%;
   box-shadow: var(--shadow-standard);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .catalogo__nota p {
@@ -390,5 +415,22 @@ h2 {
   .catalogo { padding: 5rem 1.5rem; }
   .productos__grid { grid-template-columns: 1fr; }
   .catalogo__header { flex-direction: column; align-items: flex-start; }
+}
+
+/* === DARK MODE OVERRIDES === */
+:global(html.dark) .producto__img {
+  filter: brightness(0.75) saturate(0.8);
+}
+
+:global(html.dark) .filtro-btn {
+  background: var(--bg-light);
+  border-color: var(--border-gray);
+  color: var(--text-muted);
+}
+
+:global(html.dark) .filtro-btn.active {
+  background: var(--brand-primary);
+  color: #fff;
+  border-color: var(--brand-primary);
 }
 </style>

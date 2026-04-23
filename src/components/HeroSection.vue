@@ -2,19 +2,19 @@
   <section class="hero">
     <div class="hero__overlay"></div>
     <div class="hero__content">
-      <h1 class="hero__title">
+      <h1 class="hero__title" data-aos="fade-up" data-aos-delay="200">
         Deshacerse de los bichos<br/>
         <em>no es capricho</em>
       </h1>
-      <p class="hero__sub">
+      <p class="hero__sub" data-aos="fade-up" data-aos-delay="400">
         Ropa con tecnología anti-insecto integrada para climas tropicales. Sin aerosoles, sin olor.<br/>
         Protección real contra dengue, zika y chikungunya — desde Cancún para el mundo.
       </p>
-      <div class="hero__actions">
+      <div class="hero__actions" data-aos="fade-up" data-aos-delay="600">
         <a href="#catalogo" class="btn btn--primary">Ver catálogo</a>
         <a href="#que-es" class="btn btn--ghost">¿Cómo funciona?</a>
       </div>
-      <div class="hero__stats">
+      <div class="hero__stats" data-aos="fade-up" data-aos-delay="800">
         <div class="stat">
           <span class="stat__num">20M+</span>
           <span class="stat__label">turistas en QRoo al año</span>

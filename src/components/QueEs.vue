@@ -1,21 +1,21 @@
 <template>
   <section class="que-es" id="que-es">
     <div class="container">
-      <div class="section-tag">¿Qué es Debugger?</div>
+      <div class="section-tag" data-aos="fade-up">¿Qué es Debugger?</div>
       <div class="que-es__grid">
         <div class="que-es__text">
-          <h2>Moda, tecnología<br/>y protección en una sola prenda</h2>
-          <p>La idea de Debugger surgió al observar la molestia y los problemas de salud que los insectos — principalmente los mosquitos — causan en la vida diaria de quienes vivimos en el trópico.</p>
-          <p>Quisimos crear una solución práctica que no solo repele insectos, sino que también permite a las personas disfrutar de actividades al aire libre sin incomodidades. Así nació nuestra marca, combinando moda, tecnología y protección.</p>
+          <h2 data-aos="fade-up">Moda, tecnología<br/>y protección en una sola prenda</h2>
+          <p data-aos="fade-up" data-aos-delay="100">La idea de Debugger surgió al observar la molestia y los problemas de salud que los insectos — principalmente los mosquitos — causan en la vida diaria de quienes vivimos en el trópico.</p>
+          <p data-aos="fade-up" data-aos-delay="150">Quisimos crear una solución práctica que no solo repele insectos, sino que también permite a las personas disfrutar de actividades al aire libre sin incomodidades. Así nació nuestra marca, combinando moda, tecnología y protección.</p>
           <div class="mision-vision">
-            <div class="mv-card reveal">
+            <div class="mv-card" data-aos="fade-up">
               <span class="mv-card__icon material-symbols-rounded">track_changes</span>
               <div>
                 <h4>Misión</h4>
                 <p>Ofrecer ropa innovadora que proteja de insectos, garantizando comodidad, estilo y bienestar mediante materiales de alta calidad que combinan tecnología y diseño.</p>
               </div>
             </div>
-            <div class="mv-card reveal stagger-1">
+            <div class="mv-card" data-aos="fade-up" data-aos-delay="150">
               <span class="mv-card__icon material-symbols-rounded">visibility</span>
               <div>
                 <h4>Visión</h4>
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="que-es__features">
-          <div class="feat reveal" v-for="(f, i) in features" :key="f.titulo" :class="'stagger-' + (i + 1)">
+          <div class="feat" v-for="(f, i) in features" :key="f.titulo" data-aos="fade-up" :data-aos-delay="i * 150">
             <div class="feat__icon material-symbols-rounded">{{ f.icono }}</div>
             <div>
               <h3>{{ f.titulo }}</h3>
@@ -36,9 +36,9 @@
       </div>
 
       <div class="valores">
-        <div class="section-tag" style="margin-bottom:1.5rem">Nuestros valores</div>
+        <div class="section-tag" data-aos="fade-up" style="margin-bottom:1.5rem">Nuestros valores</div>
         <div class="valores__grid">
-          <div class="valor reveal" v-for="(v, i) in valores" :key="v.nombre" :class="'stagger-' + (i + 1)">
+          <div class="valor" v-for="(v, i) in valores" :key="v.nombre" data-aos="fade-up" :data-aos-delay="i * 100">
             <span class="valor__icon material-symbols-rounded">{{ v.icono }}</span>
             <h4>{{ v.nombre }}</h4>
             <p>{{ v.desc }}</p>
@@ -136,14 +136,30 @@ export default {
   border-radius: 20px;
   padding: 1.5rem;
   box-shadow: var(--shadow-standard);
-  transition: all 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease, background 0.3s ease;
   position: relative;
   overflow: hidden;
+  cursor: default;
 }
 
 .mv-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-elevated);
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 30px 60px rgba(20, 86, 240, 0.15), var(--shadow-elevated);
+  border-color: rgba(20, 86, 240, 0.4);
+}
+
+.mv-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(20, 86, 240, 0.04) 0%, rgba(234, 94, 193, 0.03) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.mv-card:hover::before {
+  opacity: 1;
 }
 
 .mv-card::after {
@@ -169,11 +185,13 @@ export default {
   background: rgba(20, 86, 240, 0.05);
   border-radius: 12px;
   color: var(--brand-primary);
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .mv-card:hover .mv-card__icon {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.15) rotate(8deg);
+  background: rgba(20, 86, 240, 0.12);
+  box-shadow: 0 4px 12px rgba(20, 86, 240, 0.15);
 }
 
 .mv-card h4 {
@@ -184,6 +202,11 @@ export default {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.3rem;
+  transition: transform 0.3s ease;
+}
+
+.mv-card:hover h4 {
+  transform: scale(1.05);
 }
 
 .mv-card p {
@@ -191,6 +214,11 @@ export default {
   font-size: 14px;
   color: var(--text-muted);
   line-height: 1.6;
+  transition: transform 0.3s ease;
+}
+
+.mv-card:hover p {
+  transform: translateY(-2px);
 }
 
 .que-es__features {
@@ -207,19 +235,42 @@ export default {
   background: var(--bg-pure);
   border-radius: 20px;
   border: 1px solid var(--border-gray);
-  transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease;
+  transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease, background 0.3s ease;
   box-shadow: var(--shadow-standard);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.feat::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(20, 86, 240, 0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.feat:hover::before {
+  opacity: 1;
 }
 
 .feat:hover {
-  box-shadow: var(--shadow-elevated);
-  transform: translateY(-4px);
-  border-color: rgba(20, 86, 240, 0.2);
+  box-shadow: 0 30px 60px rgba(20, 86, 240, 0.15), var(--shadow-elevated);
+  transform: translateY(-12px) scale(1.05);
+  border-color: rgba(20, 86, 240, 0.4);
 }
 
 .feat:hover .feat__icon {
-  transform: scale(1.12) rotate(-3deg);
-  background: rgba(20, 86, 240, 0.1);
+  transform: scale(1.18) rotate(-6deg);
+  background: var(--brand-primary);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(20, 86, 240, 0.25);
+}
+
+.feat:hover h3 {
+  color: var(--brand-primary);
 }
 
 .feat__icon { 
@@ -232,6 +283,7 @@ export default {
   background: var(--bg-light);
   border-radius: 14px;
   color: var(--brand-primary);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feat h3 {
@@ -240,6 +292,12 @@ export default {
   font-weight: 600;
   color: var(--text-dark);
   margin-bottom: 0.3rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.feat:hover h3 {
+  color: var(--brand-primary);
+  transform: translateX(8px);
 }
 
 .feat p {
@@ -247,6 +305,11 @@ export default {
   font-size: 14px;
   color: var(--text-muted);
   line-height: 1.5;
+  transition: transform 0.3s ease;
+}
+
+.feat:hover p {
+  transform: translateX(5px);
 }
 
 .valores { border-top: 1px solid var(--border-light); padding-top: 4rem; }
@@ -263,19 +326,26 @@ export default {
   background: var(--bg-pure);
   border-radius: 20px;
   border: 1px solid var(--border-gray);
-  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease, border-color 0.3s ease;
   box-shadow: var(--shadow-standard);
+  cursor: default;
 }
 
 .valor:hover { 
-  transform: translateY(-6px); 
-  box-shadow: var(--shadow-elevated);
-  border-color: rgba(20, 86, 240, 0.2);
+  transform: translateY(-8px) scale(1.02); 
+  box-shadow: 0 14px 30px rgba(20, 86, 240, 0.1), var(--shadow-elevated);
+  border-color: rgba(20, 86, 240, 0.25);
 }
 
 .valor:hover .valor__icon {
-  transform: scale(1.15);
-  background: rgba(20, 86, 240, 0.08);
+  transform: scale(1.2) rotate(-5deg);
+  background: var(--brand-primary);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(20, 86, 240, 0.3);
+}
+
+.valor:hover h4 {
+  color: var(--brand-primary);
 }
 
 .valor__icon { 
@@ -289,7 +359,7 @@ export default {
   height: 56px;
   background: rgba(20, 86, 240, 0.03);
   border-radius: 50%;
-  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), background 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), background 0.35s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .valor h4 {
@@ -298,6 +368,7 @@ export default {
   font-weight: 600;
   color: var(--text-dark);
   margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 }
 
 .valor p {

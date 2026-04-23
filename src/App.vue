@@ -16,29 +16,18 @@ import QueEs from './components/QueEs.vue'
 import ComoFunciona from './components/ComoFunciona.vue'
 import Catalogo from './components/CatalogoLinea.vue'
 import FooterSection from './components/FooterSection.vue'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 export default {
   name: 'App',
   components: { NavBar, HeroSection, QueEs, ComoFunciona, Catalogo, FooterSection },
   mounted() {
-    // Double rAF: espera 2 frames para que el browser pinte los elementos en estado oculto
-    // antes de que el observer los detecte y los revele. Sin esto, animan en 0ms.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              // Delay base: 400ms de pausa antes de animar
-              setTimeout(() => {
-                entry.target.classList.add('active');
-              }, 400);
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-      });
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80,
     });
   }
 }
@@ -74,6 +63,58 @@ export default {
   --shadow-standard: rgba(0, 0, 0, 0.08) 0px 4px 6px;
   --shadow-brand: rgba(44, 30, 116, 0.16) 0px 0px 15px;
   --shadow-elevated: rgba(36, 36, 36, 0.08) 0px 12px 16px -4px;
+
+  --expo-out: linear(
+    0 0%, 0.1684 2.66%, 0.3165 5.49%, 0.446 8.52%, 0.5581 11.78%,
+    0.6535 15.29%, 0.7341 19.11%, 0.8011 23.3%, 0.8557 27.93%,
+    0.8962 32.68%, 0.9283 38.01%, 0.9529 44.08%, 0.9711 51.14%,
+    0.9833 59.06%, 0.9915 68.74%, 1 100%
+  );
+}
+
+/* === DARK MODE === */
+html.dark {
+  --bg-pure: #0f1117;
+  --bg-light: #1a1d27;
+  --bg-glass: hsla(225, 15%, 8%, 0.75);
+  --bg-dark: #0a0c10;
+  
+  --text-main: #e4e4e7;
+  --text-dark: #f4f4f5;
+  --text-charcoal: #f4f4f5;
+  --text-muted: #9ca3af;
+  --text-light: #6b7280;
+  
+  --border-light: #1f2230;
+  --border-gray: #2a2d37;
+  
+  --shadow-standard: rgba(0, 0, 0, 0.3) 0px 4px 6px;
+  --shadow-brand: rgba(20, 86, 240, 0.2) 0px 0px 15px;
+  --shadow-elevated: rgba(0, 0, 0, 0.4) 0px 12px 16px -4px;
+}
+
+/* === VIEW TRANSITION: Circular Reveal from Button === */
+::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+::view-transition-new(root) {
+  animation: vt-reveal 0.8s both;
+}
+
+::view-transition-old(root),
+html.dark::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+html.dark::view-transition-new(root) {
+  animation: vt-reveal 0.8s both;
+}
+
+@keyframes vt-reveal {
+  from { clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%)); }
+  to   { clip-path: circle(150% at var(--vt-x, 50%) var(--vt-y, 50%)); }
 }
 
 html { scroll-behavior: smooth; }
@@ -124,26 +165,4 @@ a { color: var(--text-dark); text-decoration: none; }
   0% { left: -100%; }
   100% { left: 100%; }
 }
-
-.reveal {
-  opacity: 0;
-  transform: translateY(48px);  /* Más desplazamiento = más dramático */
-  will-change: transform, opacity;  /* GPU acceleration */
-  transition:
-    opacity  0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger: cada ítem aparece 80ms después del anterior */
-.stagger-1 { transition-delay: 0.08s; }
-.stagger-2 { transition-delay: 0.16s; }
-.stagger-3 { transition-delay: 0.24s; }
-.stagger-4 { transition-delay: 0.32s; }
-.stagger-5 { transition-delay: 0.40s; }
-.stagger-6 { transition-delay: 0.48s; }
 </style>
