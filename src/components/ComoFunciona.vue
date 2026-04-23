@@ -37,25 +37,31 @@ export default {
 <style scoped>
 .como-funciona {
   padding: 7rem 2.5rem;
-  background: var(--verde);
-  color: #fff;
+  background: var(--bg-light);
+  color: var(--text-dark);
 }
 
 .container { max-width: 1100px; margin: 0 auto; }
 
 .section-tag {
-  font-size: 0.78rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--verde-claro);
+  color: var(--brand-primary);
   margin-bottom: 1rem;
+  display: inline-block;
+  background: rgba(20, 86, 240, 0.05);
+  padding: 6px 14px;
+  border-radius: 9999px;
 }
 
 h2 {
+  font-family: 'Outfit', sans-serif;
   font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 800;
-  color: #fff;
+  font-weight: 600;
+  color: var(--text-dark);
   margin-bottom: 4rem;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -69,50 +75,70 @@ h2 {
 }
 
 .step {
-  padding: 2rem;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 16px;
-  background: rgba(255,255,255,0.05);
-  transition: background 0.2s;
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 20px;
+  background: var(--bg-pure);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-standard);
+  position: relative;
+  overflow: hidden;
 }
 
-.step:hover { background: rgba(255,255,255,0.09); }
+.step:hover { 
+  background: var(--bg-pure);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
 
 .step__num {
-  font-family: 'Syne', sans-serif;
-  font-size: 2.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 4rem;
   font-weight: 800;
-  color: rgba(255,255,255,0.12);
+  color: rgba(20, 86, 240, 0.05);
   margin-bottom: 1rem;
   line-height: 1;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 0;
+}
+
+.step__content {
+  position: relative;
+  z-index: 1;
 }
 
 .step__content h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--tierra);
-  margin-bottom: 0.6rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.8rem;
 }
 
 .step__content p {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.65);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text-muted);
   line-height: 1.7;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .como-funciona__banner {
-  background: rgba(255,255,255,0.06);
-  border-left: 3px solid var(--tierra);
-  padding: 1.4rem 2rem;
-  border-radius: 0 10px 10px 0;
+  background: rgba(20, 86, 240, 0.04);
+  border-left: 4px solid var(--brand-primary);
+  padding: 1.5rem 2rem;
+  border-radius: 0 20px 20px 0;
 }
 
 .banner__text {
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.75);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--brand-primary);
   line-height: 1.7;
   font-style: italic;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {

@@ -9,14 +9,14 @@
           <p>Quisimos crear una solución práctica que no solo repele insectos, sino que también permite a las personas disfrutar de actividades al aire libre sin incomodidades. Así nació nuestra marca, combinando moda, tecnología y protección.</p>
           <div class="mision-vision">
             <div class="mv-card">
-              <span class="mv-card__icon">🎯</span>
+              <span class="mv-card__icon material-symbols-rounded">track_changes</span>
               <div>
                 <h4>Misión</h4>
                 <p>Ofrecer ropa innovadora que proteja de insectos, garantizando comodidad, estilo y bienestar mediante materiales de alta calidad que combinan tecnología y diseño.</p>
               </div>
             </div>
             <div class="mv-card">
-              <span class="mv-card__icon">🌟</span>
+              <span class="mv-card__icon material-symbols-rounded">visibility</span>
               <div>
                 <h4>Visión</h4>
                 <p>Ser la marca líder en ropa funcional para exteriores y actividades diarias, reconocida por su eficacia contra insectos y su compromiso con la innovación y la salud.</p>
@@ -26,7 +26,7 @@
         </div>
         <div class="que-es__features">
           <div class="feat" v-for="f in features" :key="f.titulo">
-            <div class="feat__icon">{{ f.icono }}</div>
+            <div class="feat__icon material-symbols-rounded">{{ f.icono }}</div>
             <div>
               <h3>{{ f.titulo }}</h3>
               <p>{{ f.desc }}</p>
@@ -39,7 +39,7 @@
         <div class="section-tag" style="margin-bottom:1.5rem">Nuestros valores</div>
         <div class="valores__grid">
           <div class="valor" v-for="v in valores" :key="v.nombre">
-            <span class="valor__icon">{{ v.icono }}</span>
+            <span class="valor__icon material-symbols-rounded">{{ v.icono }}</span>
             <h4>{{ v.nombre }}</h4>
             <p>{{ v.desc }}</p>
           </div>
@@ -55,19 +55,19 @@ export default {
   data() {
     return {
       features: [
-        { icono: '🦟', titulo: 'Anti dengue, zika y chikungunya', desc: 'Tecnología repelente específica contra los mosquitos transmisores de las enfermedades más comunes del trópico.' },
-        { icono: '☀️', titulo: 'Protección UV incluida', desc: 'Tela con filtro solar para cuidarte del sol intenso del Caribe mexicano.' },
-        { icono: '💨', titulo: 'Transpirable y de secado rápido', desc: 'Diseñada para el calor extremo: ligera, fresca y cómoda todo el día.' },
-        { icono: '💧', titulo: 'Resistente a humedad', desc: 'Materiales que aguantan el clima tropical sin deformarse ni perder su efectividad.' },
-        { icono: '🧺', titulo: 'Durable al lavado', desc: 'El tratamiento repelente se mantiene activo durante múltiples lavadas.' },
-        { icono: '🚫', titulo: 'Sin aerosoles', desc: 'Olvídate de sprays pegajosos y olores fuertes. La protección ya está en la tela.' },
+        { icono: 'pest_control', titulo: 'Anti dengue, zika y chikungunya', desc: 'Tecnología repelente específica contra los mosquitos transmisores de las enfermedades más comunes del trópico.' },
+        { icono: 'sunny', titulo: 'Protección UV incluida', desc: 'Tela con filtro solar para cuidarte del sol intenso del Caribe mexicano.' },
+        { icono: 'air', titulo: 'Transpirable y de secado rápido', desc: 'Diseñada para el calor extremo: ligera, fresca y cómoda todo el día.' },
+        { icono: 'humidity_mid', titulo: 'Resistente a humedad', desc: 'Materiales que aguantan el clima tropical sin deformarse ni perder su efectividad.' },
+        { icono: 'laundry', titulo: 'Durable al lavado', desc: 'El tratamiento repelente se mantiene activo durante múltiples lavadas.' },
+        { icono: 'do_not_disturb_on', titulo: 'Sin aerosoles', desc: 'Olvídate de sprays pegajosos y olores fuertes. La protección ya está en la tela.' },
       ],
       valores: [
-        { icono: '💡', nombre: 'Innovación', desc: 'Buscamos constantemente nuevas soluciones para proteger y mejorar la vida de nuestros clientes.' },
-        { icono: '⭐', nombre: 'Calidad', desc: 'Garantizamos productos duraderos, efectivos y cómodos.' },
-        { icono: '🌿', nombre: 'Sostenibilidad', desc: 'Priorizamos materiales amigables con el medio ambiente.' },
-        { icono: '❤️', nombre: 'Compromiso con la salud', desc: 'Promovemos la prevención de enfermedades transmitidas por insectos.' },
-        { icono: '🤝', nombre: 'Servicio al cliente', desc: 'Atención personalizada y cercana para garantizar satisfacción.' },
+        { icono: 'lightbulb', nombre: 'Innovación', desc: 'Buscamos constantemente nuevas soluciones para proteger y mejorar la vida de nuestros clientes.' },
+        { icono: 'verified', nombre: 'Calidad', desc: 'Garantizamos productos duraderos, efectivos y cómodos.' },
+        { icono: 'eco', nombre: 'Sostenibilidad', desc: 'Priorizamos materiales amigables con el medio ambiente.' },
+        { icono: 'health_and_safety', nombre: 'Compromiso con la salud', desc: 'Promovemos la prevención de enfermedades transmitidas por insectos.' },
+        { icono: 'handshake', nombre: 'Servicio al cliente', desc: 'Atención personalizada y cercana para garantizar satisfacción.' },
       ]
     }
   }
@@ -77,18 +77,23 @@ export default {
 <style scoped>
 .que-es {
   padding: 7rem 2.5rem;
-  background: var(--crema);
+  background: var(--bg-pure);
 }
 
 .container { max-width: 1100px; margin: 0 auto; }
 
 .section-tag {
-  font-size: 0.78rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--verde-med);
+  color: var(--brand-primary);
   margin-bottom: 3rem;
+  display: inline-block;
+  background: rgba(20, 86, 240, 0.05);
+  padding: 6px 14px;
+  border-radius: 9999px;
 }
 
 .que-es__grid {
@@ -101,18 +106,18 @@ export default {
 
 .que-es__text h2 {
   font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.15;
-  color: var(--verde);
+  color: var(--text-dark);
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 }
 
 .que-es__text > p {
-  color: var(--texto-suave);
-  line-height: 1.8;
+  color: var(--text-muted);
+  line-height: 1.6;
   margin-bottom: 1rem;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 .mision-vision {
@@ -126,26 +131,39 @@ export default {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  background: var(--blanco);
-  border: 1px solid var(--beige);
-  border-radius: 10px;
-  padding: 1.2rem;
+  background: var(--bg-pure);
+  border: 1px solid var(--border-gray);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-standard);
 }
 
-.mv-card__icon { font-size: 1.4rem; min-width: 32px; }
+.mv-card__icon { 
+  font-size: 1.8rem; 
+  min-width: 42px; 
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 86, 240, 0.05);
+  border-radius: 12px;
+  color: var(--brand-primary);
+}
 
 .mv-card h4 {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--verde);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   margin-bottom: 0.3rem;
 }
 
 .mv-card p {
-  font-size: 0.85rem;
-  color: var(--texto-suave);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
   line-height: 1.6;
 }
 
@@ -158,35 +176,48 @@ export default {
 .feat {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
-  padding: 1.2rem;
-  background: var(--blanco);
-  border-radius: 12px;
-  border: 1px solid var(--beige);
+  gap: 1.2rem;
+  padding: 1.5rem;
+  background: var(--bg-pure);
+  border-radius: 20px;
+  border: 1px solid var(--border-gray);
   transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: var(--shadow-standard);
 }
 
 .feat:hover {
-  box-shadow: 0 6px 24px rgba(45,90,39,0.08);
+  box-shadow: var(--shadow-elevated);
   transform: translateY(-2px);
 }
 
-.feat__icon { font-size: 1.4rem; min-width: 36px; line-height: 1; }
+.feat__icon { 
+  font-size: 1.8rem; 
+  min-width: 48px; 
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-light);
+  border-radius: 14px;
+  color: var(--brand-primary);
+}
 
 .feat h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--verde);
-  margin-bottom: 0.2rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.3rem;
 }
 
 .feat p {
-  font-size: 0.83rem;
-  color: var(--texto-suave);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
   line-height: 1.5;
 }
 
-.valores { border-top: 1px solid var(--beige); padding-top: 4rem; }
+.valores { border-top: 1px solid var(--border-light); padding-top: 4rem; }
 
 .valores__grid {
   display: grid;
@@ -196,28 +227,45 @@ export default {
 
 .valor {
   text-align: center;
-  padding: 1.5rem 1rem;
-  background: var(--blanco);
-  border-radius: 12px;
-  border: 1px solid var(--beige);
-  transition: transform 0.2s;
+  padding: 2rem 1.5rem;
+  background: var(--bg-pure);
+  border-radius: 20px;
+  border: 1px solid var(--border-gray);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-standard);
 }
 
-.valor:hover { transform: translateY(-3px); }
+.valor:hover { 
+  transform: translateY(-3px); 
+  box-shadow: var(--shadow-elevated);
+}
 
-.valor__icon { font-size: 1.8rem; display: block; margin-bottom: 0.7rem; }
+.valor__icon { 
+  font-size: 2.2rem; 
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  color: var(--brand-primary);
+  width: 56px;
+  height: 56px;
+  background: rgba(20, 86, 240, 0.03);
+  border-radius: 50%;
+}
 
 .valor h4 {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--verde);
-  margin-bottom: 0.4rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
 }
 
 .valor p {
-  font-size: 0.78rem;
-  color: var(--texto-suave);
-  line-height: 1.5;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
 @media (max-width: 900px) {

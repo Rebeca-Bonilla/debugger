@@ -40,39 +40,50 @@ export default {
 }
 
 .navbar.scrolled {
-  background: rgba(245, 240, 232, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-standard);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .navbar__logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: 0.15em;
-  color: var(--blanco);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  color: #ffffff;
   transition: color 0.3s;
 }
 
-.navbar.scrolled .navbar__logo { color: var(--verde); }
+.navbar.scrolled .navbar__logo { color: var(--text-dark); }
 
 .navbar__links {
   display: flex;
-  gap: 2rem;
+  gap: 0.5rem;
   list-style: none;
 }
 
 .navbar__links a {
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 500;
   color: rgba(255,255,255,0.85);
-  transition: color 0.2s;
-  letter-spacing: 0.03em;
+  transition: all 0.2s;
+  padding: 8px 16px;
+  border-radius: 9999px;
 }
 
-.navbar.scrolled .navbar__links a { color: var(--texto-suave); }
-.navbar__links a:hover { color: var(--acento) !important; }
+.navbar.scrolled .navbar__links a { color: var(--text-muted); }
+
+.navbar__links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.navbar.scrolled .navbar__links a:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-dark);
+}
 
 .navbar__burger {
   display: none;
@@ -88,12 +99,12 @@ export default {
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--blanco);
+  background: #ffffff;
   transition: all 0.3s;
   border-radius: 2px;
 }
 
-.navbar.scrolled .navbar__burger span { background: var(--verde); }
+.navbar.scrolled .navbar__burger span { background: var(--text-dark); }
 
 @media (max-width: 768px) {
   .navbar__burger { display: flex; }
@@ -101,13 +112,14 @@ export default {
     display: none;
     position: absolute;
     top: 100%; left: 0; right: 0;
-    background: var(--crema);
+    background: var(--bg-pure);
     flex-direction: column;
     padding: 1.5rem 2.5rem;
-    gap: 1.2rem;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    gap: 0.5rem;
+    box-shadow: var(--shadow-elevated);
   }
   .navbar__links.open { display: flex; }
-  .navbar__links a { color: var(--texto) !important; font-size: 1rem; }
+  .navbar__links a { color: var(--text-dark) !important; font-size: 1rem; }
+  .navbar__links a:hover { background: rgba(0,0,0,0.05); color: var(--text-dark); }
 }
 </style>

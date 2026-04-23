@@ -21,3 +21,9 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+
+minimax-design.md
+# Ignorar archivos en .agent
+.agent
+minimax-design-utf8.md
