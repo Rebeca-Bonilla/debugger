@@ -68,21 +68,39 @@ export default {
   font-size: 14px;
   font-weight: 500;
   color: rgba(255,255,255,0.85);
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   padding: 8px 16px;
   border-radius: 9999px;
+  position: relative;
 }
 
 .navbar.scrolled .navbar__links a { color: var(--text-muted); }
 
+.navbar__links a::after {
+  content: '';
+  position: absolute;
+  bottom: 6px; left: 50%;
+  width: 0; height: 2px;
+  background: var(--brand-primary);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.navbar:not(.scrolled) .navbar__links a::after {
+  background: #fff;
+}
+
+.navbar__links a:hover::after {
+  width: 20px;
+}
+
 .navbar__links a:hover {
-  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
 
 .navbar.scrolled .navbar__links a:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--text-dark);
+  color: var(--brand-primary);
 }
 
 .navbar__burger {

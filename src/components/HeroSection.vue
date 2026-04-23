@@ -77,13 +77,19 @@ export default { name: 'HeroSection' }
   position: relative;
   z-index: 2;
   max-width: 720px;
-  animation: fadeUp 0.9s ease both;
+  animation: heroIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Stagger hero children via animation-delay */
+.hero__title   { animation-delay: 0.1s; }
+.hero__sub     { animation-delay: 0.25s; }
+.hero__actions { animation-delay: 0.4s; opacity: 0; animation: heroIn 0.8s 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+.hero__stats   { animation-delay: 0.55s; opacity: 0; animation: heroIn 0.8s 0.55s cubic-bezier(0.16,1,0.3,1) both; }
 
 .hero__badge {
   display: inline-block;
@@ -142,9 +148,16 @@ export default { name: 'HeroSection' }
   transition: all 0.25s;
 }
 .btn--primary { background: var(--primary-500); color: #ffffff; }
-.btn--primary:hover { background: var(--primary-600); transform: translateY(-2px); box-shadow: var(--shadow-standard); }
+.btn--primary:hover { 
+  background: var(--primary-600); 
+  transform: translateY(-4px) scale(1.02); 
+  box-shadow: 0 10px 20px rgba(20, 86, 240, 0.2); 
+}
 .btn--ghost { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.05); }
-.btn--ghost:hover { background: rgba(255,255,255,0.1); }
+.btn--ghost:hover { 
+  background: rgba(255,255,255,0.1); 
+  transform: translateY(-4px) scale(1.02);
+}
 
 .hero__stats {
   display: flex;
@@ -161,6 +174,11 @@ export default { name: 'HeroSection' }
   font-size: 1.8rem;
   color: var(--brand-sky);
   line-height: 1;
+}
+
+/* Float applies only when parent is not animating */
+.hero__stats .stat__num {
+  animation: float 5s 1.5s ease-in-out infinite;
 }
 
 .stat__label {

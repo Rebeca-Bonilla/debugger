@@ -19,7 +19,28 @@ import FooterSection from './components/FooterSection.vue'
 
 export default {
   name: 'App',
-  components: { NavBar, HeroSection, QueEs, ComoFunciona, Catalogo, FooterSection }
+  components: { NavBar, HeroSection, QueEs, ComoFunciona, Catalogo, FooterSection },
+  mounted() {
+    // Double rAF: espera 2 frames para que el browser pinte los elementos en estado oculto
+    // antes de que el observer los detecte y los revele. Sin esto, animan en 0ms.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // Delay base: 400ms de pausa antes de animar
+              setTimeout(() => {
+                entry.target.classList.add('active');
+              }, 400);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      });
+    });
+  }
 }
 </script>
 
@@ -63,6 +84,7 @@ body {
   color: var(--text-main);
   overflow-x: hidden;
   line-height: 1.50;
+  user-select: none; /* No se puede copiar el texto */
 }
 
 h1, h2 { font-family: 'Outfit', sans-serif; font-weight: 600; color: var(--text-dark); }
@@ -77,7 +99,51 @@ a { color: var(--text-dark); text-decoration: none; }
   align-items: center;
   justify-content: center;
   line-height: 1;
-  width: 1.5em; height: 1.5em; /* Ligeramente más grande para dar aire */
+  width: 1.5em; height: 1.5em;
   vertical-align: middle;
 }
+
+/* --- ANIMACIONES GLOBALES --- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);  /* Más desplazamiento = más dramático */
+  will-change: transform, opacity;  /* GPU acceleration */
+  transition:
+    opacity  0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger: cada ítem aparece 80ms después del anterior */
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+.stagger-4 { transition-delay: 0.32s; }
+.stagger-5 { transition-delay: 0.40s; }
+.stagger-6 { transition-delay: 0.48s; }
 </style>

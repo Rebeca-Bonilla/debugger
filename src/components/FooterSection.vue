@@ -45,6 +45,11 @@ export default { name: 'FooterSection' }
   background: #181e25;
   color: rgba(255,255,255,0.6);
   padding: 5rem 2.5rem 2.5rem;
+  position: relative;
+  z-index: 1;
+  border-radius: 30px 30px 0 0;
+  overflow: hidden;
+
 }
 
 .container { max-width: 1100px; margin: 0 auto; }
@@ -129,23 +134,27 @@ export default { name: 'FooterSection' }
 }
 
 .social-link {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  padding: 6px;
+  border-radius: 50%;
 }
 
 .social-link:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.2);
 }
 
 .social-link--instagram:hover {
   color: #E1306C;
+  filter: drop-shadow(0 4px 12px rgba(225, 48, 108, 0.4));
 }
 
 .social-link--x:hover {
   color: #fff;
+  filter: drop-shadow(0 4px 12px rgba(255,255,255,0.25));
 }
 
 .footer__bottom {

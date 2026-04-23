@@ -1,10 +1,10 @@
 <template>
   <section class="como-funciona" id="como-funciona">
     <div class="container">
-      <div class="section-tag">¿Cómo funciona?</div>
-      <h2>Protección invisible,<br/>comodidad real</h2>
+      <div class="section-tag reveal">¿Cómo funciona?</div>
+      <h2 class="reveal stagger-1">Protección invisible,<br/>comodidad real</h2>
       <div class="steps">
-        <div class="step" v-for="(s, i) in steps" :key="i">
+        <div class="step reveal" v-for="(s, i) in steps" :key="i" :class="'stagger-' + (i + 1)">
           <div class="step__num">{{ String(i + 1).padStart(2, '0') }}</div>
           <div class="step__content">
             <h3>{{ s.titulo }}</h3>
@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="como-funciona__banner">
+      <div class="como-funciona__banner reveal stagger-4">
         <span class="banner__text">La tecnología de microencapsulado libera el repelente gradualmente con el movimiento y el calor del cuerpo.</span>
       </div>
     </div>
@@ -79,16 +79,35 @@ h2 {
   border: 1px solid var(--border-gray);
   border-radius: 20px;
   background: var(--bg-pure);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease;
   box-shadow: var(--shadow-standard);
   position: relative;
   overflow: hidden;
+  cursor: default;
 }
 
-.step:hover { 
+.step::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(20, 86, 240, 0.03) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.step:hover {
   background: var(--bg-pure);
-  transform: translateY(-4px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-elevated);
+  border-color: rgba(20, 86, 240, 0.25);
+}
+
+.step:hover::before {
+  opacity: 1;
+}
+
+.step:hover .step__num {
+  color: rgba(20, 86, 240, 0.15);
 }
 
 .step__num {
@@ -130,6 +149,13 @@ h2 {
   border-left: 4px solid var(--brand-primary);
   padding: 1.5rem 2rem;
   border-radius: 0 20px 20px 0;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.como-funciona__banner:hover {
+  background: rgba(20, 86, 240, 0.08);
+  box-shadow: 0 0 0 1px rgba(20, 86, 240, 0.15);
 }
 
 .banner__text {

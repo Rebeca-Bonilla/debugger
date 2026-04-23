@@ -19,7 +19,7 @@
       </div>
 
       <div class="productos__grid">
-        <div class="producto" v-for="p in productosFiltrados" :key="p.nombre">
+        <div class="producto reveal" v-for="(p, i) in productosFiltrados" :key="p.nombre" :class="'stagger-' + (i % 4 + 1)">
           <div class="producto__img" :style="{ background: p.bg }">
             <div class="producto__placeholder">{{ p.emoji }}</div>
             <span class="producto__tag" v-if="p.nuevo">Nuevo</span>
@@ -130,6 +130,7 @@ export default {
 .catalogo {
   padding: 7rem 2.5rem;
   background: var(--bg-pure);
+  z-index: -1;
 }
 
 .container { max-width: 1100px; margin: 0 auto; }
@@ -187,7 +188,11 @@ h2 {
   transition: all 0.2s ease;
 }
 
-.filtro-btn:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+.filtro-btn:hover { 
+  border-color: var(--brand-primary); 
+  color: var(--brand-primary); 
+  transform: translateY(-4px) scale(1.02);
+}
 .filtro-btn.active { background: var(--brand-primary); color: #fff; border-color: var(--brand-primary); box-shadow: var(--brand-glow); }
 
 .productos__grid {
@@ -216,9 +221,11 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   flex-direction: column;
   gap: 0.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .producto__placeholder { font-size: 5rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
@@ -236,6 +243,12 @@ h2 {
   border-radius: 9999px;
   text-transform: uppercase;
   box-shadow: 0 4px 10px rgba(234, 94, 193, 0.2);
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .producto__badges {
@@ -365,7 +378,7 @@ h2 {
 
 .btn-nota:hover { 
   background: #0f44c4;
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.02);
   box-shadow: 0 8px 24px rgba(20, 86, 240, 0.4);
 }
 

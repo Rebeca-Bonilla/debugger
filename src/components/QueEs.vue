@@ -8,14 +8,14 @@
           <p>La idea de Debugger surgió al observar la molestia y los problemas de salud que los insectos — principalmente los mosquitos — causan en la vida diaria de quienes vivimos en el trópico.</p>
           <p>Quisimos crear una solución práctica que no solo repele insectos, sino que también permite a las personas disfrutar de actividades al aire libre sin incomodidades. Así nació nuestra marca, combinando moda, tecnología y protección.</p>
           <div class="mision-vision">
-            <div class="mv-card">
+            <div class="mv-card reveal">
               <span class="mv-card__icon material-symbols-rounded">track_changes</span>
               <div>
                 <h4>Misión</h4>
                 <p>Ofrecer ropa innovadora que proteja de insectos, garantizando comodidad, estilo y bienestar mediante materiales de alta calidad que combinan tecnología y diseño.</p>
               </div>
             </div>
-            <div class="mv-card">
+            <div class="mv-card reveal stagger-1">
               <span class="mv-card__icon material-symbols-rounded">visibility</span>
               <div>
                 <h4>Visión</h4>
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="que-es__features">
-          <div class="feat" v-for="f in features" :key="f.titulo">
+          <div class="feat reveal" v-for="(f, i) in features" :key="f.titulo" :class="'stagger-' + (i + 1)">
             <div class="feat__icon material-symbols-rounded">{{ f.icono }}</div>
             <div>
               <h3>{{ f.titulo }}</h3>
@@ -38,7 +38,7 @@
       <div class="valores">
         <div class="section-tag" style="margin-bottom:1.5rem">Nuestros valores</div>
         <div class="valores__grid">
-          <div class="valor" v-for="v in valores" :key="v.nombre">
+          <div class="valor reveal" v-for="(v, i) in valores" :key="v.nombre" :class="'stagger-' + (i + 1)">
             <span class="valor__icon material-symbols-rounded">{{ v.icono }}</span>
             <h4>{{ v.nombre }}</h4>
             <p>{{ v.desc }}</p>
@@ -136,6 +136,27 @@ export default {
   border-radius: 20px;
   padding: 1.5rem;
   box-shadow: var(--shadow-standard);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mv-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.mv-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: none;
+}
+
+.mv-card:hover::after {
+  animation: shine 0.8s ease-in-out;
 }
 
 .mv-card__icon { 
@@ -148,6 +169,11 @@ export default {
   background: rgba(20, 86, 240, 0.05);
   border-radius: 12px;
   color: var(--brand-primary);
+  transition: transform 0.3s ease;
+}
+
+.mv-card:hover .mv-card__icon {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .mv-card h4 {
@@ -181,13 +207,19 @@ export default {
   background: var(--bg-pure);
   border-radius: 20px;
   border: 1px solid var(--border-gray);
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease;
   box-shadow: var(--shadow-standard);
 }
 
 .feat:hover {
   box-shadow: var(--shadow-elevated);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  border-color: rgba(20, 86, 240, 0.2);
+}
+
+.feat:hover .feat__icon {
+  transform: scale(1.12) rotate(-3deg);
+  background: rgba(20, 86, 240, 0.1);
 }
 
 .feat__icon { 
@@ -231,13 +263,19 @@ export default {
   background: var(--bg-pure);
   border-radius: 20px;
   border: 1px solid var(--border-gray);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.3s ease;
   box-shadow: var(--shadow-standard);
 }
 
 .valor:hover { 
-  transform: translateY(-3px); 
+  transform: translateY(-6px); 
   box-shadow: var(--shadow-elevated);
+  border-color: rgba(20, 86, 240, 0.2);
+}
+
+.valor:hover .valor__icon {
+  transform: scale(1.15);
+  background: rgba(20, 86, 240, 0.08);
 }
 
 .valor__icon { 
@@ -251,6 +289,7 @@ export default {
   height: 56px;
   background: rgba(20, 86, 240, 0.03);
   border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), background 0.3s ease;
 }
 
 .valor h4 {
